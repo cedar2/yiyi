@@ -1,0 +1,69 @@
+@startuml
+skinparam dpi 150
+actor 用户 as User
+actor 管理员 as Admin
+
+rectangle "前端 (Vue.js)" as Frontend {
+  [OCR 识别与校对]
+  [古籍检索]
+  [知识图谱 & 语义分析]
+  [智能问答]
+}
+
+rectangle "后端 (Spring Boot)" as Backend {
+  [用户请求处理]
+  [OCR 识别调用]
+  [全文检索]
+  [问答系统]
+  [知识图谱管理]
+}
+
+database "易学古籍数据库 (MySQL)" as DB {
+  [古籍文本数据]
+  [OCR 识别结果]
+  [术语关联]
+  [问答数据集]
+}
+
+cloud "AI 计算模块 (本地大模型)" as AI {
+  [OCR 识别]
+  [智能搜索优化]
+  [问答生成]
+  [知识图谱推理]
+}
+
+Admin --> Frontend : 上传古籍图片
+Frontend --> Backend : 发送 OCR 识别请求
+Backend --> AI : OCR 识别 & 预处理
+AI --> Backend : 返回识别结果
+Backend --> Frontend : 返回识别文本
+Admin --> Frontend : 校对 & 修正文本
+Frontend --> Backend : 提交最终校对文本
+Backend --> DB : 存入校对后文本
+
+User --> Frontend : 进行全文检索
+Frontend --> Backend : 关键词/语义检索请求
+Backend --> DB : 查询古籍文本数据
+DB --> Backend : 返回检索结果
+Backend --> AI : 进行语义优化
+AI --> Backend : 生成优化搜索结果
+Backend --> Frontend : 返回最终搜索结果
+Frontend --> User : 显示检索结果
+
+User --> Frontend : 请求知识图谱
+Frontend --> Backend : 发送术语查询请求
+Backend --> DB : 获取术语关系数据
+DB --> Backend : 返回知识图谱数据
+Backend --> AI : 进行语义分析
+AI --> Backend : 生成术语关系图
+Backend --> Frontend : 返回知识图谱
+Frontend --> User : 可视化展示
+
+User --> Frontend : 提问易学相关问题
+Frontend --> Backend : 发送问答请求
+Backend --> AI : 结合知识库生成回答
+AI --> Backend : 返回智能回答
+Backend --> Frontend : 返回问答内容
+Frontend --> User : 显示智能回答
+
+@enduml

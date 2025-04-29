@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'ab';
+    src:url('TH-Khaai-PP0.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ba';
+    src:url('TH-Khaai-PP2.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'hanamin';
+    src:url('hanamin.ttf');
+    unicode-range: U+4E00-U+9FFF;
+    font-weight: normal;
+    font-style: normal;
+}
